@@ -1,0 +1,326 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+} ;
+void addfirst(struct node ** head,int data){
+   struct node* newNode = malloc(sizeof(struct node));
+   newNode->data=data;
+   newNode->next=*head;
+   *head=newNode;
+    
+}
+void display(struct node* head){
+    struct node*temp = head;
+    while(temp!=NULL){
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("END");
+}
+void addlast(struct node ** head,int data){
+    struct node* newNode = malloc(sizeof(struct node));
+    struct node*temp = *head;
+    newNode->data=data;
+    newNode->next=NULL;
+    
+    while(temp->next != NULL){
+        temp=temp->next;
+    }
+    temp->next=newNode;
+    
+
+  
+}
+void addpos(struct node ** head,int data, int pos){
+     struct node* newNode = malloc(sizeof(struct node));
+     struct node* temp = *head;
+     newNode->data=data;
+     newNode->next=NULL;
+     for(int i=1;i<pos-1;i++){
+      temp=temp->next;
+     }
+      newNode->next=temp->next;
+      temp->next=newNode;
+}
+void delfirst(struct node ** head){
+     struct node*temp = *head;
+     *head=(*head)->next;
+     free(temp);
+}
+void dellast(struct node ** head){
+     
+      struct node*temp = *head;
+      struct node*prev = NULL;
+      while(temp->next!=NULL){
+          prev=temp;
+          temp=temp->next;
+      }
+      prev->next=NULL;
+     
+     
+       free(temp);
+}
+void delany(struct node ** head, int pos){
+     struct node*temp = *head;
+     struct node*prev = NULL;
+    
+     for(int i=1;i<pos;i++){
+         prev=temp;
+         temp=temp->next;
+        
+     }
+      prev->next=temp->next;
+     
+     free(temp);
+     
+}
+
+
+
+int main() {
+    struct node * list =NULL;
+
+  addfirst(&list,13);
+  addfirst(&list,6);
+  addfirst(&list,18);
+  addfirst(&list,2);
+  
+  display(list);
+  printf("\n");
+  addlast(&list,69);
+  addlast(&list,34);
+  display(list);
+   printf("\n");
+  addpos(&list,45,2);
+  addpos(&list,12,4);
+  
+  display(list);
+   printf("\n");
+   delfirst(&list);
+   display(list);
+   printf("\n");
+   dellast(&list);
+   display(list);
+    printf("\n");
+    delany(&list,3);
+     display(list);
+     delfirst(&list);
+      delfirst(&list);
+       delfirst(&list); 
+        delfirst(&list);
+          delfirst(&list);
+         
+        printf("\n");
+         display(list);
+}
+
+
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+    struct node *prev;
+};
+
+void addfirst(struct node ** head ,int data){
+    struct node * newNode = malloc(sizeof(struct node));
+    newNode->data=data;
+    newNode->next=*head;
+    newNode->prev=NULL;
+    if (*head!=NULL){
+    (*head)->prev=newNode;
+    }
+     *head=newNode;
+}
+
+void display(struct node * head){
+    struct node *temp=head;
+    while(temp!=NULL){
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("END");
+}
+void addlast(struct node**head,int data){
+    struct node * newNode=malloc(sizeof(struct node));
+    struct node*temp= *head;
+    newNode->data=data;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=newNode;
+    newNode->prev=temp;
+}
+void addany(struct node ** head,int pos,int data){
+    struct node * newNode=malloc(sizeof(struct node));
+    struct node* temp = *head;
+    newNode->data=data;
+    newNode->prev=NULL;
+    newNode->next=NULL;
+    for(int i=1;i<pos-1;i++){
+        temp=temp->next;
+    }
+     newNode->next=temp->next;
+      temp->next->prev=newNode;
+    temp->next=newNode;
+    newNode->prev=temp;
+}
+void delfirst(struct node ** head){
+    struct node *temp=*head;
+    *head=(*head)->next;
+    free(temp);
+}
+void dellast(struct node ** head){
+    struct node * temp = *head;
+    while(temp->next!=NULL){
+         temp=temp->next;
+    }
+    temp->prev->next=NULL;
+    
+    free(temp);
+}
+void delpos(struct node ** head, int pos){
+    struct node * temp = *head;
+    for(int i=1;i<pos;i++){
+        temp=temp->next;
+    }
+    temp->prev->next=temp->next;
+    temp->next->prev=temp->prev;
+    free(temp);
+}
+
+
+int main(){
+    struct node * list= NULL;
+    addfirst(&list,6);
+     addfirst(&list,20);
+      addfirst(&list,78);
+    display(list);
+    printf("\n");
+    addlast(&list,4);
+    addlast(&list,56);
+    display(list);
+    printf("\n");
+    addany(&list,2,44);
+    addany(&list,4,31);
+    display(list);
+    printf("\n");
+    delfirst(&list);
+    display(list);
+    printf("\n");
+    dellast(&list);
+    display(list);
+    printf("\n");
+    delpos(&list,2);
+   
+    display(list);
+} 
+
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+    struct node *prev;
+};
+
+void addfirst(struct node ** head ,int data){
+    struct node * newNode = malloc(sizeof(struct node));
+    newNode->data=data;
+    newNode->next=*head;
+    newNode->prev=NULL;
+    if (*head!=NULL){
+    (*head)->prev=newNode;
+    }
+     *head=newNode;
+}
+
+void display(struct node * head){
+    struct node *temp=head;
+    while(temp!=NULL){
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("END");
+}
+void addlast(struct node**head,int data){
+    struct node * newNode=malloc(sizeof(struct node));
+    struct node*temp= *head;
+    newNode->data=data;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=newNode;
+    newNode->prev=temp;
+}
+void addany(struct node ** head,int pos,int data){
+    struct node * newNode=malloc(sizeof(struct node));
+    struct node* temp = *head;
+    newNode->data=data;
+    newNode->prev=NULL;
+    newNode->next=NULL;
+    for(int i=1;i<pos-1;i++){
+        temp=temp->next;
+    }
+     newNode->next=temp->next;
+      temp->next->prev=newNode;
+    temp->next=newNode;
+    newNode->prev=temp;
+}
+void delfirst(struct node ** head){
+    struct node *temp=*head;
+    *head=(*head)->next;
+    free(temp);
+}
+void dellast(struct node ** head){
+    struct node * temp = *head;
+    while(temp->next!=NULL){
+         temp=temp->next;
+    }
+    temp->prev->next=NULL;
+    
+    free(temp);
+}
+void delpos(struct node ** head, int pos){
+    struct node * temp = *head;
+    for(int i=1;i<pos;i++){
+        temp=temp->next;
+    }
+    temp->prev->next=temp->next;
+    temp->next->prev=temp->prev;
+    free(temp);
+}
+
+
+int main(){
+    struct node * list= NULL;
+    addfirst(&list,6);
+     addfirst(&list,20);
+      addfirst(&list,78);
+    display(list);
+    printf("\n");
+    addlast(&list,4);
+    addlast(&list,56);
+    display(list);
+    printf("\n");
+    addany(&list,2,44);
+    addany(&list,4,31);
+    display(list);
+    printf("\n");
+    delfirst(&list);
+    display(list);
+    printf("\n");
+    dellast(&list);
+    display(list);
+    printf("\n");
+    delpos(&list,2);
+   
+    display(list);
+}
